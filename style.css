@@ -5,7 +5,9 @@ body {
 .slide {
     width: 100%;
     height: 100%;
-    background: red;
+    display: flex;
+    background: black;
+    align-items: center;
     background-size: cover;
     position: absolute;
     overflow: hidden;
@@ -22,4 +24,8 @@ body {
 .visible {
 	opacity: 1;
 	transition: 0.5s;
+}
+
+video {
+	max-width: 100%;
 }

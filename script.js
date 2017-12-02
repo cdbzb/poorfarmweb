@@ -3,22 +3,39 @@ const slideElPrev = document.querySelector (".prev")
 const slideEl = document.querySelector (".slide")
 const slideElNext = document.querySelector (".next")
 const slides = [ 
-	"1.jpg",
-	"2.jpg",
-	"3.jpg",
+	{ background: "1.jpg" },
+	{ background: "2.jpg" },
+	{ background: "3.jpg" },
+	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" },
 ]
 
 let currentSlide = 0
 
-function getSlideURL(n){
-	return "img/" + slides[mod(n,slides.length)]
+function getSlide(n){
+	return slides[mod(n,slides.length)]
+}
+
+function getSlideBackground(n){
+	const slide=getSlide(n)
+	return slide.background ? "url(img/" + slide.background + ")" : ""
 }
 
 function setCurrentSlide( n ) {
 	currentSlide = n
-	slideElPrev.style.backgroundImage = "url(" + getSlideURL(n-1) + ")"
-	slideEl.style.backgroundImage = "url(" + getSlideURL(n) + ")"
-	slideElNext.style.backgroundImage = "url(" + getSlideURL(n+1) + ")"
+	slideElPrev.style.backgroundImage = getSlideBackground (n-1) 
+	slideElPrev.innerHTML = getSlide (n-1).html || ""
+	const prevVid = slideElPrev.querySelector("video")
+	prevVid && prevVid.pause()
+
+	slideEl.style.backgroundImage = getSlideBackground (n) 
+	slideEl.innerHTML = getSlide (n).html || ""
+	const Vid = slideEl.querySelector("video")
+	Vid && Vid.play()
+
+	slideElNext.style.backgroundImage = getSlideBackground (n+1)
+	slideElNext.innerHTML = getSlide (n+1).html || ""
+	const nextVid = slideElNext.querySelector("video")
+	nextVid && nextVid.pause()
 }
 setCurrentSlide(0)
 
@@ -50,3 +67,12 @@ document.addEventListener("keydown",e => {
 })
 
 
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+var context = new AudioContext();
+
+function playSound(buffer) {
+  var source = context.createBufferSource(); // creates a sound source
+  source.buffer = buffer;                    // tell the source which sound to play
+  source.connect(context.destination);       // connect the source to the context's destination (the speakers)
+  source.start(0);                           // play the source now
+                                             // note: on older systems, may have to use deprecated noteOn(time);
