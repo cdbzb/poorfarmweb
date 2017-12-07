@@ -4,27 +4,34 @@ const audioEl = document.querySelector ("audio")
 const slideElPrev = document.querySelector (".prev")
 const slideEl = document.querySelector (".slide")
 const slideElNext = document.querySelector (".next")
+
 const slides = [ 
 	{ background: "small/poorfarm-exterior.jpg"           } ,
 	{ background: "small/beds-wide.jpg "                    , audio:'raw/beds.wav' }             , 
+    
+// pipe room
 	{ background: "small/pipe-room-head-on.jpg"             , audio:'raw/descent-filtered.wav' } , 
 	{ background: "small/pipe-room1.jpg"                    , audio:'raw/descent-filtered.wav' } , 
 	{ background: "small/pipe-room-paintings-oblique.jpg"   , audio:'raw/descent-filtered.wav' } , 
 
-	{ html: "<video src='small/front.mov'> </video>" }  , 
-	{ html: "<video src='small/back.mov'> </video>" }  , 
-	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" } , 
+// Video room 
+	{ html: "<video src='small/front.mp4'> </video>" }  , 
+	{ html: "<video src='small/back.mp4'> </video>" }  , 
 
-	{ background: 'small/bent-mirror-1.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-head-on.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-hi-res-angle.jpg' , audio:',' } ,
-	{ background: 'small/bent-mirror-mask+dots.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-mask-and-door.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-mask-long.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-mask.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-mid.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-reverse.jpg' , audio:'' } ,
-	{ background: 'small/bent-mirror-room-from-hall.jpg' , audio:'' } ,
+// bent mirror room
+	{ background: 'small/bent-mirror-1.jpg'              , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-head-on.jpg'        , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-hi-res-angle.jpg'   , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-mask+dots.jpg'      , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-mask-and-door.jpg'  , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-mask-long.jpg'      , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-mask.jpg'           , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-mid.jpg'            , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-reverse.jpg'        , audio:'small/tapping2.mp3' } , 
+	{ background: 'small/bent-mirror-room-from-hall.jpg' , audio:'small/tapping2.mp3' } , 
+
+// moon pool room 
+	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" } , 
 	]
 
 
