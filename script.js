@@ -1,13 +1,33 @@
 
+const audioSpareEl = document.querySelector (".spare")
+const audioEl = document.querySelector ("audio")
 const slideElPrev = document.querySelector (".prev")
 const slideEl = document.querySelector (".slide")
 const slideElNext = document.querySelector (".next")
 const slides = [ 
-	{ background: "1.jpg" },
-	{ background: "2.jpg" },
-	{ background: "3.jpg" },
-	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" },
-]
+	{ background: "small/poorfarm-exterior.jpg"           } ,
+	{ background: "small/beds-wide.jpg "                    , audio:'raw/beds.wav' }             , 
+	{ background: "small/pipe-room-head-on.jpg"             , audio:'raw/descent-filtered.wav' } , 
+	{ background: "small/pipe-room1.jpg"                    , audio:'raw/descent-filtered.wav' } , 
+	{ background: "small/pipe-room-paintings-oblique.jpg"   , audio:'raw/descent-filtered.wav' } , 
+
+	{ html: "<video src='small/front.mov'> </video>" }  , 
+	{ html: "<video src='small/back.mov'> </video>" }  , 
+	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" } , 
+
+	{ background: 'small/bent-mirror-1.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-head-on.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-hi-res-angle.jpg' , audio:',' } ,
+	{ background: 'small/bent-mirror-mask+dots.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-mask-and-door.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-mask-long.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-mask.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-mid.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-reverse.jpg' , audio:'' } ,
+	{ background: 'small/bent-mirror-room-from-hall.jpg' , audio:'' } ,
+	]
+
+
 
 let currentSlide = 0
 
@@ -17,26 +37,74 @@ function getSlide(n){
 
 function getSlideBackground(n){
 	const slide=getSlide(n)
-	return slide.background ? "url(img/" + slide.background + ")" : ""
+	return slide.background ? "url(" + slide.background + ")" : ""
+}
+
+function playPauseSlideVideo(el,play){
+	const vid = el.querySelector("video")
+	if (vid) play ? vid.play() : vid.pause() 
+}
+
+	
+function updateSlideEl(el,n,play) {
+	el.style.backgroundImage = getSlideBackground (n) 
+	el.innerHTML = getSlide (n).html || ""
+	playPauseSlideVideo(el,play)
+}
+
+function animate (tick,finished,duration){
+	let start 
+	requestAnimationFrame ( t => {
+		start = t 
+		requestAnimationFrame(frame)
+	})
+	function frame (t)  { 
+		const elapsed = (t-start)/duration
+		if (elapsed < 1)  {
+			tick(elapsed)
+			requestAnimationFrame(frame)
+		} else {
+			finished()
+		}
+	}	
+}
+
+let currentAudio
+
+function setAudio(filename){
+	if (filename == currentAudio) return
+	if (filename){
+		audioSpareEl.src = filename
+		audioSpareEl.volume = 0
+		audioSpareEl.play()
+	}
+	animate(t=>{ 
+		audioEl.volume=1-t
+		if (filename) audioSpareEl.volume=t
+	}, finished=> {
+		if (filename) {
+			audioEl.src = filename
+			audioEl.play()
+		} else {
+			audioEl.pause()
+		}
+
+		currentAudio = filename
+		audioEl.currentTime = audioSpareEl.currentTime
+		audioEl.volume = 1
+		audioSpareEl.volume = 0
+	} , 1500)
+
 }
 
 function setCurrentSlide( n ) {
 	currentSlide = n
-	slideElPrev.style.backgroundImage = getSlideBackground (n-1) 
-	slideElPrev.innerHTML = getSlide (n-1).html || ""
-	const prevVid = slideElPrev.querySelector("video")
-	prevVid && prevVid.pause()
-
-	slideEl.style.backgroundImage = getSlideBackground (n) 
-	slideEl.innerHTML = getSlide (n).html || ""
-	const Vid = slideEl.querySelector("video")
-	Vid && Vid.play()
-
-	slideElNext.style.backgroundImage = getSlideBackground (n+1)
-	slideElNext.innerHTML = getSlide (n+1).html || ""
-	const nextVid = slideElNext.querySelector("video")
-	nextVid && nextVid.pause()
+	setAudio(getSlide(n).audio)
+	updateSlideEl(slideElPrev,n-1,false)
+	updateSlideEl(slideEl, n, true)
+	updateSlideEl(slideElNext, n+1, false)
 }
+
 setCurrentSlide(0)
 
 function mod( n , base ){
@@ -67,12 +135,3 @@ document.addEventListener("keydown",e => {
 })
 
 
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
-var context = new AudioContext();
-
-function playSound(buffer) {
-  var source = context.createBufferSource(); // creates a sound source
-  source.buffer = buffer;                    // tell the source which sound to play
-  source.connect(context.destination);       // connect the source to the context's destination (the speakers)
-  source.start(0);                           // play the source now
-                                             // note: on older systems, may have to use deprecated noteOn(time);
