@@ -7,12 +7,12 @@ const slideElNext = document.querySelector (".next")
 
 const slides = [ 
 	{ background: "small/poorfarm-exterior.jpg"           } ,
-	{ background: "small/beds-wide.jpg "                    , audio:'raw/beds.wav' }             , 
+	{ background: "small/beds-wide.jpg "                    , audio:'small/beds.wav.mp3' }             , 
     
 // pipe room
-	{ background: "small/pipe-room-head-on.jpg"             , audio:'raw/descent-filtered.wav' } , 
-	{ background: "small/pipe-room1.jpg"                    , audio:'raw/descent-filtered.wav' } , 
-	{ background: "small/pipe-room-paintings-oblique.jpg"   , audio:'raw/descent-filtered.wav' } , 
+	{ background: "small/pipe-room-head-on.jpg"             , audio:'small/descent-filtered.mp3' } , 
+	{ background: "small/pipe-room1.jpg"                    , audio:'small/descent-filtered.mp3' } , 
+	{ background: "small/pipe-room-paintings-oblique.jpg"   , audio:'small/descent-filtered.mp3' } , 
 
 // Video room 
 	{ html: "<video src='small/front.mp4'> </video>" }  , 
