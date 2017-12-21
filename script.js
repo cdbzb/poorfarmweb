@@ -31,7 +31,7 @@ const slides = [
 	{ background: 'small/bent-mirror-room-from-hall.jpg' , audio:'small/tapping2.mp3' } , 
 
 // moon pool room 
-	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" } , 
+	{ html: "<video src='small/Flitter Demo.mp4'> </video>" } , 
 	{ background: 'small/moon-pool-hi-res.jpg'        , audio:'small/flitter.mp3' } , 
 	]
 
