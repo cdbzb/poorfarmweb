@@ -32,6 +32,7 @@ const slides = [
 
 // moon pool room 
 	{ html: "<video src='raw/Flitter Demo.mp4'> </video>" } , 
+	{ background: 'small/moon-pool-hi-res.jpg'        , audio:'small/flitter.mp3' } , 
 	]
 
 

@@ -2,3 +2,4 @@ raw
 *.mov
 *.wav
 
+.DS_Store
