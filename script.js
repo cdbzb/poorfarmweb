@@ -33,6 +33,12 @@ const slides = [
 // moon pool room 
 	{ html: "<video src='small/Flitter Demo.mp4'> </video>" } , 
 	{ background: 'small/moon-pool-hi-res.jpg'        , audio:'small/flitter.mp3' } , 
+	{ background: 'small/moon-pool-long.jpg'        , audio:'small/flitter.mp3' } , 
+
+// pyramids
+    { background: 'small/pyramid-popsicle-high-res.jpg' } ,
+    { background: 'small/pyramids-looking-out.jpg' } ,
+    { background: 'small/pyramids-1.jpg' } ,
 	]
 
 
